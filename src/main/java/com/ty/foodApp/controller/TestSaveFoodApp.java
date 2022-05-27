@@ -19,7 +19,7 @@ public class TestSaveFoodApp {
 		FoodOrderService foodOrderService=new FoodOrderService();
 		Menu menu=new Menu();
 		FoodOrder foodOrder=new FoodOrder();
-		foodOrder.setName("Neeraj");
+		foodOrder.setName("Ras");
 		foodOrder.setPhone(7296304883l);
 		
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("vikas");

@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import com.ty.foodApp.DAO.FoodOrderDao;
 import com.ty.foodApp.DTO.FoodOrder;
 import com.ty.foodApp.DTO.Item;
+import static com.ty.foodApp.DTO.Tax.*;
 
 public class FoodOrderService {
 
@@ -46,5 +47,16 @@ public class FoodOrderService {
 		entityTransaction.begin();
 		entityManager.merge(foodOrder);
 		entityTransaction.commit();
+	}
+	public double generateBill(int id) {
+		FoodOrderDao foodOrderDao=new FoodOrderDao();
+
+		FoodOrder foodOrder=foodOrderDao.getOrderById(id);
+		double offer=0;
+		if(foodOrderDao.getTotal(foodOrder.getItem())>1000) {
+			offer=foodOrderDao.getTotal(foodOrder.getItem())/10;
+		}
+		double a=(foodOrderDao.getTotal(foodOrder.getItem())/SGST)+(foodOrderDao.getTotal(foodOrder.getItem())/CGST);
+		return foodOrderDao.getTotal(foodOrder.getItem())-offer+a;
 	}
 }
